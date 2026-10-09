@@ -6,7 +6,7 @@ Ce filtrage s'effectue dans le **Backend** au sein de la fonction `build_llm_his
 
 ### 2. Que se passe-t-il quand on change de modèle au milieu d'une conversation, et pourquoi est-ce possible ?
 Lorsque l'on change de modèle en cours de route, le nouveau modèle sélectionné prend le relais de manière transparente pour le message suivant. 
-C'est possible parce que les LLM sont "stateless" (sans mémoire d'une requête à l'autre). L'application leur renvoie **l'intégralité de l'historique textuel passé** à chaque nouvelle saisie. Le nouveau modèle lit donc simplement les échanges précédents comme s'il en avait toujours fait partie et génère la suite logique.
+C'est possible parce que les LLM sont sans mémoire. L'application leur renvoie **l'intégralité de l'historique textuel passé** à chaque nouvelle saisie. Le nouveau modèle lit donc simplement les échanges précédents comme s'il en avait toujours fait partie et génère la suite logique.
 
 ### 3. À quel moment enregistrez-vous la réponse streamée en base, et que se passe-t-il si le flux est interrompu ?
 La réponse streamée est enregistrée en base de données **à la toute fin du flux**, uniquement après que la boucle de lecture des lignes de l'API externe s'est terminée avec succès et que le texte complet a été accumulé dans la variable `reply_accumulated`. 
